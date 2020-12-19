@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env sh
 virtualenv --python=python3 env --no-site-packages
-source env/bin/activate
+. env/bin/activate
 pip install -r requirements.txt
 
 export FLASK_APP=app.py
