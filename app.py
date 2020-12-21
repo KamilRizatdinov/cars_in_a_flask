@@ -51,7 +51,8 @@ def handle_cars():
             {
                 "name": car.name,
                 "model": car.model,
-                "doors": car.doors
+                "doors": car.doors,
+                "id": car.id,
             } for car in cars]
 
         return {"count": len(results), "cars": results, "message": "success"}
@@ -65,7 +66,8 @@ def handle_car(car_id):
         response = {
             "name": car.name,
             "model": car.model,
-            "doors": car.doors
+            "doors": car.doors,
+            "id": car.id,
         }
         return {"message": "success", "car": response}
 
