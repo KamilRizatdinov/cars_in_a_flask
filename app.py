@@ -1,3 +1,5 @@
+import os 
+
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -28,7 +30,7 @@ class CarsModel(db.Model):
 
 @app.route('/')
 def hello():
-	return {"hello": "world!"}
+	return {"hello": "world!", "ip_addr": os.popen('ip addr show zthnhegio3 | grep "\<inet\>" | awk \'{ print $2 }\' | awk -F "/" \'{ print $1 }\'').read().strip()}
 
 
 @app.route('/cars', methods=['POST', 'GET'])
