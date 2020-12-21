@@ -1,0 +1,53 @@
+---
+- name: database
+  hosts: dbservers
+  become: yes
+
+  vars:
+    ansible_ssh_pipelining: true
+
+  tasks:
+    - name: install postgresql server
+      apt:
+        pkg: postgresql
+        state: present
+
+    - name: change postgres network binding
+      lineinfile:
+        path: /etc/postgresql/10/main/postgresql.conf
+        regexp: '# listen_addresses'
+        line: "listen_addresses = '*'"
+
+    - name: change postgres pg hba access
+      lineinfile:
+        path: /etc/postgresql/10/main/pg_hba.conf
+        regexp: 'host  all  all 0.0.0.0/0 md5'
+        line: 'host  all  all 0.0.0.0/0 md5'
+
+    - name: start postgresql server
+      service:
+        enabled: yes
+        name: postgresql
+        state: restarted
+
+    # psycopg2 needed for user, db creation
+    - name: install pip3
+      apt: name=python3-pip state=present
+
+    - pip:
+        name: psycopg2-binary
+
+    - name: create postgresql user
+      postgresql_user:
+        user: "root"
+        password: "root"
+        role_attr_flags: "CREATEDB,NOSUPERUSER"
+      become: true
+      become_user: postgres
+
+    - name: create postgresql db
+      postgresql_db:
+        name: "cars_api"
+        state: present
+      become: true
+      become_user: postgres

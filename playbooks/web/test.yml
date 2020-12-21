@@ -1,0 +1,14 @@
+---
+- name: webserver
+  hosts: webservers
+  become: yes
+  
+  tasks:
+    - name: Run tests 
+      shell:
+        cmd: ". venv/bin/activate && pytest -v"
+        chdir: /home/serv/cars_in_a_flask
+      register: out
+
+    - name: Getting the output
+      debug: var=out.stdout_lines

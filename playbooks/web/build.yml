@@ -1,0 +1,24 @@
+---
+- name: webserver
+  hosts: webservers
+  become: yes
+  
+  tasks:
+    - name: install python packages
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      loop:
+        - python3-pip
+        - python3-venv
+
+    - name: clone the repository
+      git:
+        repo: 'https://github.com/KamilRizatdinov/cars_in_a_flask.git'
+        dest: /home/serv/cars_in_a_flask
+
+    - name: install specified python requirements
+      pip:
+        requirements: /home/serv/cars_in_a_flask/requirements.txt
+        virtualenv: /home/serv/cars_in_a_flask/venv

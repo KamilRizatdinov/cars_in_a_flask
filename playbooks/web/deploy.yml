@@ -1,0 +1,23 @@
+---
+- name: webserver
+  hosts: webservers
+  become: yes
+  
+  environment:
+    FLASK_APP: /home/serv/cars_in_a_flask/app.py
+    FLASK_RUN_HOST: 0.0.0.0
+
+  tasks:
+    - name: Kill flask process
+      shell:
+        cmd: "pkill flask && sleep 1"
+      ignore_errors: true
+
+    - name: Deploy applicaton
+      shell:
+        cmd: ". venv/bin/activate && nohup flask run >output.log 2>&1 &"
+        chdir: /home/serv/cars_in_a_flask
+      register: out
+
+    - name: Getting the output
+      debug: var=out.stdout_lines
