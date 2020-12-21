@@ -21,3 +21,5 @@ venv
 # Folders
 .idea
 .vscode
+
+output.log
