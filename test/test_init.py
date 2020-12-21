@@ -27,7 +27,6 @@ def test_car_presence_functionality():
 	response = requests.get(f'{BASE_URL}cars')
 	present = False
 	if response.status_code == 200:
-		# print(response.content["cars"]["name"])
 		for car in response.json()["cars"]:
 			if car["name"] == "toyota" and car["model"] == "x4" and car["doors"] == 5:
 				present = True
@@ -45,5 +44,3 @@ def test_car_delete_functionality():
 				else:
 					resp = requests.get(f'{BASE_URL}cars/{id}')
 					assert resp.status_code == 404
-				break
-	
