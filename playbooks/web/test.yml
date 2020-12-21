@@ -2,6 +2,7 @@
 - name: webserver
   hosts: webservers
   become: yes
+  serial: 1
   
   tasks:
     - name: Run tests 
