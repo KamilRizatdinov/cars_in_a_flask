@@ -1,4 +1,5 @@
 import requests
+from time import sleep
 
 BASE_URL = "http://192.168.195.188:80/"
 
@@ -34,7 +35,6 @@ def test_car_presence_functionality():
 
 def test_car_delete_functionality():
 	response = requests.get(f'{BASE_URL}cars')
-	deleted = False
 	if response.status_code == 200:
 		for car in response.json()["cars"]:
 			if car["name"] == "toyota" and car["model"] == "x4" and car["doors"] == 5:
@@ -45,4 +45,5 @@ def test_car_delete_functionality():
 				else:
 					resp = requests.get(f'{BASE_URL}cars/{id}')
 					assert resp.status_code == 404
+				break
 	
