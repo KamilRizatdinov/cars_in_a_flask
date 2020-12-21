@@ -28,7 +28,7 @@ class CarsModel(db.Model):
 
 @app.route('/')
 def hello():
-	return {"hello": "world"}
+	return {"hello": "world!"}
 
 
 @app.route('/cars', methods=['POST', 'GET'])
