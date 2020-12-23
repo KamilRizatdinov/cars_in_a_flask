@@ -30,7 +30,7 @@ class CarsModel(db.Model):
 
 @app.route('/')
 def hello():
-	return {"hello": "world!", "ip_addr": os.popen('ip addr show zthnhegio3 | grep "\<inet\>" | awk \'{ print $2 }\' | awk -F "/" \'{ print $1 }\'').read().strip()}
+	return {"hello": "Innopolis!", "ip_addr": os.popen('ip addr show zthnhegio3 | grep "\<inet\>" | awk \'{ print $2 }\' | awk -F "/" \'{ print $1 }\'').read().strip()}
 
 
 @app.route('/cars', methods=['POST', 'GET'])
