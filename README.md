@@ -1,6 +1,6 @@
 [![HitCount](http://hits.dwyl.io/ro6ley/cars_in_a_flask.svg)](http://hits.dwyl.io/ro6ley/cars_in_a_flask)
 
-# Cars in a Flask
+# Cars in a Flask!
 
 This repository contains the code for this [blogpost](https://stackabuse.com/using-sqlalchemy-with-flask-and-postgresql/).
 
